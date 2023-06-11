@@ -1,9 +1,12 @@
-import Tkinter
-import tkMessageBox
-from Tkinter import *
-from tkFileDialog import askopenfilename
+
+
+import tkinter as Tkinter
+import tkinter.messagebox as tkMessageBox
+from tkinter import *
+from tkinter.filedialog import askopenfilename
 from sklearn.svm import SVC
 from sklearn.externals import joblib
+#import joblib
 import cv2, math, numpy as np, dlib,threading
 from PIL import ImageTk, Image
 from cv2 import COLOR_BGR2GRAY
@@ -173,9 +176,11 @@ class MyNormalbutton:
                     app.svm_model = joblib.load(app.svm_path) #load in the selected model
                     app.disable_or_enable_application('enable')
                     
-                except:
+                except Exception as ex:
+                    template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+                    message = template.format(type(ex).__name__, ex.args)
                     if not app.svm_path =='': #if something wrong was selected and the dialog not cancelled
-                        tkMessageBox.showwarning('Warning', 'Please select a valid SVM model.')
+                        tkMessageBox.showwarning('Warning', message)# 'Please select a valid SVM model.')
                     app.svm_path='' #reset the path to empty string
                     app.disable_or_enable_application('disable') #disable application setting (real time, test image, etc)
                     app.modelSelection.config(text = 'Please select a model.')#update the label again
@@ -361,12 +366,12 @@ class MyApp:
         self.thread.daemon=True
         self.thread.start()
         #start the thread here to move the mouse so the GUI updates properly after every frame
-        self.thread1 = threading.Thread(target=self.moveMouse, args=())
-        self.thread1.daemon=True
-        self.thread1.start()
+        #self.thread1 = threading.Thread(target=self.moveMouse, args=())
+        #self.thread1.daemon=True
+        #self.thread1.start()
         
         #set callback to handle window close
-        self.root.wm_title('Realtime Emotion Recognition GUI - Guja Bozorgzadeh')
+        self.root.wm_title('Realtime Emotion Recognition GUI')
         self.root.wm_protocol('WM_DELETE_WINDOW', self.onClose)
         
         self.detector = dlib.get_frontal_face_detector()#the dlib face detector

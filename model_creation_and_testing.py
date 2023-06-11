@@ -337,7 +337,7 @@ def test_dataset(test_features, test_labels, model,application_testing=False, pe
 
 if __name__ == '__main__':
     
-    
+    #THESE ARE FOR THE SETUP FOR DLIB, ETC
     #enter your classes into this list, your subfolder names in your dataset must have the same names as your classes
     #names are case sensitive !!
     emotions = ["neutral", "anger", "disgust", "happiness", "sadness", "fear", "surprise"] #Emotion list
@@ -349,27 +349,31 @@ if __name__ == '__main__':
     predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat") #the feature detector for landmark points
 
    
+    #THIS IS TO MARK LANDMARK POINTS ON IMAGES
     #this function marks the landmark on selected images and displayes those images.
-    #enter a list with paths to your owm images to use it.
+    #enter a list with paths to your images to use it.
     #press the space button to go through the images, any other button to stop
     
     #mark_landmark_points(paths =['dataset//own/happiness//1.jpg','dataset//own/happiness//2.jpg']) 
     
     
     
+    #THIS IS TO CREATE A MODEL
     #enter the paths to your datasets here to train the corresponding model
     path = 'dataset//own_resized_faceonly'
     save = 'pretrained_svms//linear_kernel//with_length//own_resized_faceonly_100'
     #create an en 'empty' model with a linear kernel in this case, it still needs to be trained
     #training is done in the create_SVM_model function
     #load = 'pretrained_svms//linear_kernel//with_length//own_resized_faceonly_100'
-    clf = SVC(kernel='linear', probability=True, tol=1e-3) 
-    clf = create_SVM_model(emotions, path, clf, with_length=True, save_location=save) #with this, the newly trained model is loaded into clf
+    model = SVC(kernel='linear', probability=True, tol=1e-3) 
+    clf = create_SVM_model(emotions, path, model, with_length=True, save_location=save) #with this, the newly trained model is loaded into clf
+    
+    #TO LOAD A PREVIOUSLY CREATED MODEL
+    #load = 'pretrained_svms//linear_kernel//with_length//own_resized_faceonly_100'
+    #clf = create_SVM_model(emotions, path, model, with_length=True, load_model = load)
     
     
-   
-    
-    #THIS IS TO TEST THE NEWLY CREATED MODEL
+    #THIS IS TO TEST THE MODEL
     #this function extracts the features and prepares a new test dataset for the classifier
     path_to_test_dataset ='dataset//test_database_face_only'
     path_to_labels = 'test_labels.txt'

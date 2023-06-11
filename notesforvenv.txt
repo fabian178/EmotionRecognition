@@ -1,0 +1,12 @@
+This is what you should do if you don't want to create a new virtual environment:
+
+In venv/bin folder there are 3 files that store your venv path explicitly and if the path is wrong they take the normal python path so you should change the path there to your new path.
+
+change: set -gx VIRTUAL_ENV "what/ever/path/you/need"  in activate.fish
+
+change: VIRTUAL_ENV="what/ever/path/you/need" in activate
+
+change: setenv VIRTUAL_ENV "what/ever/path/you/need" in activate.csh
+
+Note #1:
+the path is to /venv and not to /venv/bin

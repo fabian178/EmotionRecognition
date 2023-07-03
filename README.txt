@@ -1,6 +1,6 @@
 Libraries required, best to use with python 3.7:
 
-1. OpenCV and all its dependencies, especially numpy (they are installed along with OpenCV):
+1. OpenCV and all its dependencies:
 	pip install opencv-python
 
 	test the installation by running 'import cv2' in a python shell

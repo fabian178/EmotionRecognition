@@ -1,3 +1,6 @@
+
+YOUTUBE VIDEO DEMONSTRATING THE PROGRAM: https://www.youtube.com/watch?v=ObeOl5dBGHU
+
 Libraries required, best to use with python 3.7:
 
 1. OpenCV and all its dependencies:
